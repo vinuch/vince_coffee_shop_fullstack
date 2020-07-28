@@ -28,7 +28,45 @@ db_drop_and_create_all()
 def db_drop_and_create_all():
     db.drop_all()
     db.create_all()
+    db_init_records()
 
+def db_init_records():
+    new_drink1 = (Drink(
+        id=1,
+        title='Matcha Shake',
+        recipe="""[
+                                {
+                                    "name" : "milk",
+                                    "color": "grey",
+                                    "parts": 1
+                                },
+                                {
+                                    "name" : "matcha",
+                                    "color": "green",
+                                    "parts": 3
+                                }
+                        ]"""
+    ))
+
+    new_drink2 = (Drink(
+        id=2,
+        title='Purple Pain',
+        recipe="""[
+                                {   
+                                    "name" : "guave",
+                                    "color": "purple",
+                                    "parts": 3
+                                },
+                                {
+                                    "name": "milk",
+                                    "color": "black",
+                                    "parts": 2
+                                }
+                        ]"""
+    ))
+
+    new_drink1.insert()
+    new_drink2.insert()
 '''
 Drink
 a persistent drink entity, extends the base SQLAlchemy Model
