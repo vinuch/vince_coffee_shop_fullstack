@@ -120,6 +120,7 @@ export class DrinksService {
       .subscribe( (res: any) => {
         if (res.success) {
           this.drinksToItems(res.drinks);
+          this.getDrinks()
         }
       });
     }

@@ -139,22 +139,22 @@ def patch_drink(payload, drink_id):
 # '''
 @app.route('/drinks/<id>', methods=['DELETE'])
 @requires_auth('delete:drinks')
-def delete_drink(id):
+def delete_drink(payload, id):
     selected_drink = Drink.query.filter(Drink.id == id).one_or_none()
     print(selected_drink)
     
     if not selected_drink:
         abort(404)
 
-    try:
-        selected_drink.delete()
-    
-        return jsonify({
-            'success': True,
-            'delete': drink_id
-        }), 200
-    except:
-        abort(401)
+    # try:
+    selected_drink.delete()
+
+    return jsonify({
+        'success': True,
+        'delete': drink_id
+    }), 200
+    # except:
+    #     abort(401)
 
 
 ## Error Handling
