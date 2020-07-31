@@ -20,16 +20,6 @@ class AuthError(Exception):
         self.status_code = status_code
 
 
-## Auth Header
-
-# '''
-# @TODO implement get_token_auth_header() method
-#     it should attempt to get the header from the request
-#         it should raise an AuthError if no header is present
-#     it should attempt to split bearer and the token
-#         it should raise an AuthError if the header is malformed
-#     return the token part of the header
-# '''
 def get_token_auth_header():
     auth = request.headers.get('Authorization', None)
     
@@ -149,11 +139,11 @@ def verify_decode_jwt(token):
             raise AuthError({
                 'code': 'invalid_header',
                 'description': 'Unable to parse authentication token.'
-            }, 400)
+            }, 401)
     raise AuthError({
                 'code': 'invalid_header',
                 'description': 'Unable to find the appropriate key.'
-            }, 400)
+            }, 401)
     raise Exception('Not Implemented')
 
 '''
@@ -178,3 +168,5 @@ def requires_auth(permission=''):
 
         return wrapper
     return requires_auth_decorator
+
+    # https://dev-vince.us.auth0.com/v2/logout?client_id=jVDT4G36W6bp6fjRHipJPirZcjQ3XKmm&returnTo=http://localhost:8100/tabs/user-page
